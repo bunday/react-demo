@@ -15,48 +15,43 @@ class BodyContent extends Component {
         this.setState({ [name]: value })
     }
 
+    
+
     render() {
         return (
-            <main className="px-12 py-5">
+            <main className="px-12 py-5 ">
                 <div className="py-4">
                     <h2 className="text-blue-500 text-2xl">Fetch Twitter History on Specific Dates</h2>
                 </div>
-                <div className="shadow-md py-4 px-2 flex">
-                    <div className="w-1/4 px-2">
+               <div className="flex flex-wrap">
+               <div className="w-full lg:w-3/4">
+                <div className="shadow-md py-4 px-2 flex flex-wrap">
+                    <div className="w-full md:w-1/2 lg:w-1/4 p-2">
                         <label className="block text-gray-800 font-bold text-sm mb-2">
                             Username
                         </label>
                         <input placeholder="@bundayyo" type="text" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700" value={this.state.username} name="username" onChange={this.handleChange} />
                     </div>
-                    <div className="w-1/4 px-2">
+                    <div className="w-full md:w-1/2 lg:w-1/4 p-2">
                         <label className="block text-gray-800 font-bold text-sm mb-2">
                             From
                         </label>
                         <input placeholder="01-01-2018" type="date" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700" value={this.state.startDate} name="startDate" onChange={this.handleChange} />
                     </div>
-                    <div className="w-1/4 px-2">
+                    <div className="w-full md:w-1/2 lg:w-1/4 p-2">
                         <label className="block text-gray-800 font-bold text-sm mb-2">
                             To
                         </label>
                         <input placeholder="01-01-2019" type="date" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700" value={this.state.endDate} name="endDate" onChange={this.handleChange} />
                     </div>
-                    <div className="w-1/4 px-2">
+                    <div className="w-full md:w-1/2 lg:w-1/4 p-2 flex justify-center">
                         <button className="bg-blue-500 px-4 py-2 rounded text-white mt-8">
-                            Fetch
+                            Fetch Tweets 🎉
                         </button>
                     </div>
 
                 </div>
                 <div className="flex mt-4">
-                    {/* Username: usernamee */}
-
-                    {/* <div>
-                        <meta name="twitter:card" content="summary" />
-                        <meta name="twitter:site" content="@flickr" />
-                        <meta name="twitter:title" content="Small Island Developing States Photo Submission" />
-                        <meta name="twitter:description" content="View the album on Flickr." />
-                        <meta name="twitter:image" content="https://farm6.staticflickr.com/5510/14338202952_93595258ff_z.jpg" />
-                    </div> */}
                     <div className="shadow-md rounded w-1/3">
                         <div>
                             <div className="bg-blue-400 rounded-t text-sm py-2 px-3 text-white flex justify-between">
@@ -93,6 +88,12 @@ class BodyContent extends Component {
                         </div>
                     </div>
                 </div>
+                </div>
+                {/* <div className="w-1/4 sm:w-full">
+                    cohjhhjjjjkkmm
+                </div> */}
+               </div>
+                
             </main>
         )
     }
