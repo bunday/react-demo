@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import passport from '../img/passport.jpg'
 import { FaRetweet, FaReply, FaHeart, FaOpenid, FaExternalLinkAlt } from 'react-icons/fa';
+import Form from './Form';
 
 class BodyContent extends Component {
 
@@ -25,32 +26,7 @@ class BodyContent extends Component {
                 </div>
                <div className="flex flex-wrap">
                <div className="w-full lg:w-3/4">
-                <div className="shadow-md w-full py-4 px-2 flex flex-wrap">
-                    <div className="w-full md:w-1/2 lg:w-1/4 p-2">
-                        <label className="block text-gray-800 font-bold text-sm mb-2">
-                            Username
-                        </label>
-                        <input placeholder="@bundayyo" type="text" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700" value={this.state.username} name="username" onChange={this.handleChange} />
-                    </div>
-                    <div className="w-full md:w-1/2 lg:w-1/4 p-2">
-                        <label className="block text-gray-800 font-bold text-sm mb-2">
-                            From
-                        </label>
-                        <input placeholder="01-01-2018" type="date" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700" value={this.state.startDate} name="startDate" onChange={this.handleChange} />
-                    </div>
-                    <div className="w-full md:w-1/2 lg:w-1/4 p-2">
-                        <label className="block text-gray-800 font-bold text-sm mb-2">
-                            To
-                        </label>
-                        <input placeholder="01-01-2019" type="date" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700" value={this.state.endDate} name="endDate" onChange={this.handleChange} />
-                    </div>
-                    <div className="w-full md:w-1/2 lg:w-1/4 p-2 flex justify-center">
-                        <button className="bg-blue-500 px-4 py-2 rounded text-white mt-8">
-                            Fetch Tweets 🎉
-                        </button>
-                    </div>
-
-                </div>
+                <Form data={this.state} handleChange={this.handleChange}/>
                 <div className="flex flex-wrap w-full mt-4">
                     <div className="shadow-md rounded w-full md:w-1/2 lg:w-1/3">
                         <div>
