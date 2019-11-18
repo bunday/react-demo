@@ -25,7 +25,7 @@ class BodyContent extends Component {
                 </div>
                <div className="flex flex-wrap">
                <div className="w-full lg:w-3/4">
-                <div className="shadow-md py-4 px-2 flex flex-wrap">
+                <div className="shadow-md w-full py-4 px-2 flex flex-wrap">
                     <div className="w-full md:w-1/2 lg:w-1/4 p-2">
                         <label className="block text-gray-800 font-bold text-sm mb-2">
                             Username
@@ -51,8 +51,8 @@ class BodyContent extends Component {
                     </div>
 
                 </div>
-                <div className="flex mt-4">
-                    <div className="shadow-md rounded w-1/3">
+                <div className="flex flex-wrap w-full mt-4">
+                    <div className="shadow-md rounded w-full md:w-1/2 lg:w-1/3">
                         <div>
                             <div className="bg-blue-400 rounded-t text-sm py-2 px-3 text-white flex justify-between">
                                 <p>2018-04-16 07:56 AM</p>
