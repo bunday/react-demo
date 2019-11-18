@@ -1,12 +1,12 @@
 import React from 'react';
 import Header from './components/Header';
-import BodyContent from './components/BodyContent';
+import TwitterHistory from './components/TwitterHistory';
 
 function App() {
   return (
     <div className="App">
       <Header/>
-      <BodyContent/>
+      <TwitterHistory/>
     </div>
   );
 }

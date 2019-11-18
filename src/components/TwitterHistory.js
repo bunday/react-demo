@@ -3,7 +3,7 @@ import Form from './Form';
 import TweetCard from './TweetCard';
 import Trend from './Trend';
 
-class BodyContent extends Component {
+class TwitterHistory extends Component {
 
     state = {
         username: '',
@@ -54,4 +54,4 @@ class BodyContent extends Component {
     }
 }
 
-export default BodyContent;
+export default TwitterHistory;
