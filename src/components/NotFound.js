@@ -1,7 +1,6 @@
 import React from 'react'
 import notFound from '../img/404.svg'
 import { Link } from 'react-router-dom'
-import { FaHome } from 'react-icons/fa'
 
 const Notfound = () => {
     return (

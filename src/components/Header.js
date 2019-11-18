@@ -1,10 +1,16 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Header = (props) => {
     return (
-        <header>
-           <div className="bg-blue-500 px-24 py-4 text-white">
-               Twitter Today in History
+        <header className="bg-blue-500 px-12 py-4 text-white flex justify-between">
+           <div className="">
+               { props.title}
+
+           </div>
+           <div>
+               <Link to='/twitter'> Twitter </Link>
+               <Link to='/movies' className="ml-3"> Movies </Link>
            </div>
         </header>
     )

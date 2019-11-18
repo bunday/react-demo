@@ -2,9 +2,25 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import TwitterHistory from './components/TwitterHistory'
 import * as serviceWorker from './serviceWorker';
+import { Route, Switch, BrowserRouter as Router } from 'react-router-dom'
+import MovieHistory from './components/MovieHistory';
+import Notfound from './components/NotFound';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+// Routing
+const routing = (
+    <Router>
+      <Switch>
+        <Route exact path="/" component={App} />
+        <Route path="/twitter" component={TwitterHistory} />
+        <Route path="/movies" component={MovieHistory} />
+        <Route component={Notfound} />
+      </Switch>
+    </Router>
+  )
+
+ReactDOM.render(routing, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
