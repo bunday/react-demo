@@ -230,6 +230,11 @@ button:-moz-focusring,
 fieldset {
   padding: 0.35em 0.75em 0.625em;
 }
+.active {
+  background-color: steelblue;
+  padding: 5px;
+  border-radius: 6px;
+}
 
 /**
  * 1. Correct the text wrapping in Edge and IE.
