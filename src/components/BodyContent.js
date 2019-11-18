@@ -2,6 +2,17 @@ import React, {Component} from 'react'
 
 class BodyContent extends Component {
 
+    state = {
+        username: '',
+        startDate: '',
+        endDate: ''
+    }
+
+    handleChange = (event) => {
+        const {name, value} = event.target;
+        this.setState({ [name]: value} )
+    }
+
     render () {
         return (
             <main className="px-24 py-5">
@@ -13,7 +24,7 @@ class BodyContent extends Component {
                     <label className="block text-gray-800 font-bold text-sm mb-2">
                         Username
                     </label>
-                    <input placeholder="@bundayyo" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700"/>
+                    <input placeholder="@bundayyo" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700" value={this.state.username} name="username" onChange={this.handleChange}/>
                     </div>
 
                 </div>
