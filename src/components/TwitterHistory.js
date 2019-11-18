@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Form from './Form';
 import TweetCard from './TweetCard';
 import Trend from './Trend';
+import Header from './Header';
 
 class TwitterHistory extends Component {
 
@@ -25,6 +26,8 @@ class TwitterHistory extends Component {
 
     render() {
         return (
+            <div>
+                <Header title='Twitter Today in History'/>
             <main className="px-12 py-5 ">
                 <div className="py-4">
                     <h2 className="text-blue-500 text-2xl">Fetch Twitter History on Specific Dates</h2>
@@ -50,6 +53,7 @@ class TwitterHistory extends Component {
                 </div>
 
             </main>
+            </div>
         )
     }
 }
