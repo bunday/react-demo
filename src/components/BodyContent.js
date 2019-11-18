@@ -89,9 +89,19 @@ class BodyContent extends Component {
                     </div>
                 </div>
                 </div>
-                {/* <div className="w-1/4 sm:w-full">
-                    cohjhhjjjjkkmm
-                </div> */}
+                <div className="w-full lg:w-1/4">
+                    <div className="shadow-lg md:mt-4 sm:mt-4 lg:ml-4 py-4 px-2">
+                        <p className="text-blue-500 text-lg">Latest Trends</p>
+                        <p className="text-gray-400 text-sm">Checkout What is Trending</p>
+
+                        <div className="flex flex-wrap pt-4">
+                        <div className="text-blue-500 text-sm w-full md:w-1/3 lg:w-full">
+                            <a href="#"> #WelcomeToNigeria <span className="text-gray-600"> 500k Tweets</span> </a>
+                        </div>
+                        </div>
+                    </div>
+                   
+                </div>
                </div>
                 
             </main>
