@@ -2,10 +2,9 @@ import React from 'react'
 import { FaHeart, FaCalendar, FaThumbsUp } from 'react-icons/fa';
 
 const MovieCard = (props) => {
-    console.log(props)
     const API_IMAGE_URL = 'https://image.tmdb.org/t/p/w500'
     return (
-        <div className="w-1/2">
+        <div className="md:w-1/2 xl:w-1/3 sm:w-full">
             <div className=" p-2">
             <img className="rounded-t" src={`${API_IMAGE_URL}${props.movie.poster_path}`} />
             <div className="bg-gray-800 rounded-b text-center">
