@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Header from './Header'
 import MovieCard from './MovieCard';
+import SearchBar from './SearchBar';
 
 class MovieHistory extends Component {
 
@@ -13,15 +14,33 @@ class MovieHistory extends Component {
         })
     }
     state = {
-        movies : []
+        movies : [],
+        search : ''
+    }
+    handleChange = (event) => {
+        const {name,value} = event.target
+        this.setState({ [name]: value})
+    }
+    handleSubmit = (event) => {
+        event.preventDefault();
+        const url = `${this.API_URL}search/movie?api_key=${this.API_KEY}&query=${this.state.search}`;
+        this.fetchMovies(url)
     }
     componentDidMount() {
+        const year = new Date().getFullYear()
+        const url = `${this.API_URL}discover/movie?sort_by=popularity.desc&year=${year}?api_key=${this.API_KEY}`;
+        this.fetchMovies(url)
+    }
+    fetchMovies(url) {
         fetch(
-            `${this.API_URL}discover/movie?sort_by=vote_count.desc?api_key=${this.API_KEY}`,
+            url,
             this.header)
         .then(res=> res.json())
         .then(response => {
+            response.results.map( elem => elem.vote_average *=  10)
             this.setState({ movies: response.results})
+        }).catch((err)=>{
+            console.log(err)
         })
     }
 
@@ -35,18 +54,11 @@ class MovieHistory extends Component {
                 </div>
                 <div className="flex flex-wrap">
                     <div className="w-full">
-                        <div>
-                            <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700" placeholder="search..."/>
-                        </div>
-                        <div className="flex justify-center mt-2">
-                            <button className="bg-blue-500 px-4 py-2 rounded">Go 💥 </button>
-                        </div>
+                        <SearchBar handleChange={this.handleChange} state={this.state} handleSubmit={this.handleSubmit}/>
                         <div className="flex flex-wrap mt-3">
                             {
                                 this.state.movies.map(movie => {
                                     if (movie && movie.poster_path) {
-                                        movie.popularity = movie.popularity * 10;
-                                        movie.vote_average = movie.vote_average * 10;
                                         return <MovieCard key={movie.id} movie={movie}/>
                                     }
                                 })
