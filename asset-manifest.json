@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/react-demo/static/css/main.220e1038.chunk.css",
+    "main.js": "/react-demo/static/js/main.a7f354e5.chunk.js",
+    "main.js.map": "/react-demo/static/js/main.a7f354e5.chunk.js.map",
+    "runtime-main.js": "/react-demo/static/js/runtime-main.23002ce0.js",
+    "runtime-main.js.map": "/react-demo/static/js/runtime-main.23002ce0.js.map",
+    "static/js/2.76097ac0.chunk.js": "/react-demo/static/js/2.76097ac0.chunk.js",
+    "static/js/2.76097ac0.chunk.js.map": "/react-demo/static/js/2.76097ac0.chunk.js.map",
+    "index.html": "/react-demo/index.html",
+    "precache-manifest.a10d49c004573b4ec80a83d03b72dd37.js": "/react-demo/precache-manifest.a10d49c004573b4ec80a83d03b72dd37.js",
+    "service-worker.js": "/react-demo/service-worker.js",
+    "static/css/main.220e1038.chunk.css.map": "/react-demo/static/css/main.220e1038.chunk.css.map",
+    "static/media/404.svg": "/react-demo/static/media/404.e1001140.svg",
+    "static/media/passport.jpg": "/react-demo/static/media/passport.a2d1f06e.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.23002ce0.js",
+    "static/js/2.76097ac0.chunk.js",
+    "static/css/main.220e1038.chunk.css",
+    "static/js/main.a7f354e5.chunk.js"
+  ]
+}
