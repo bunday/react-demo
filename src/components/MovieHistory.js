@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Header from './Header'
 import MovieCard from './MovieCard';
 import SearchBar from './SearchBar';
+import Notification from './Notification'
 
 class MovieHistory extends Component {
 
@@ -15,7 +16,10 @@ class MovieHistory extends Component {
     }
     state = {
         movies : [],
-        search : ''
+        search : '',
+        notificationContent: 'Loading, Please Wait ...',
+        notify: true,
+        notifyStyle: 'bg-teal-500'
     }
     handleChange = (event) => {
         const {name,value} = event.target
@@ -32,13 +36,35 @@ class MovieHistory extends Component {
         this.fetchMovies(url)
     }
     fetchMovies(url) {
+        this.setState({ 
+            movies: [],
+            notificationContent: 'Loading, Please Wait ...',
+            notify: true,
+            notifyStyle: 'bg-teal-500'
+        })
         fetch(
             url,
             this.header)
         .then(res=> res.json())
         .then(response => {
-            response.results.map( elem => elem.vote_average *=  10)
-            this.setState({ movies: response.results})
+            if (response.results.length > 0) {
+                response.results.map( elem => elem.vote_average *=  10)
+                this.setState({ 
+                    movies: response.results, 
+                    notify: false, 
+                    notificationContent: '', 
+                    notifyStyle: 'bg-red-500'
+                })
+            } else {
+                this.setState((prevState) => {
+                    return { 
+                        movies: response.results, 
+                        notify: true, 
+                        notificationContent: `No Movies Found with title ${prevState.search}`, 
+                        notifyStyle: 'bg-red-500'
+                    }
+                })
+            }
         }).catch((err)=>{
             console.log(err)
         })
@@ -55,13 +81,20 @@ class MovieHistory extends Component {
                 <div className="flex flex-wrap">
                     <div className="w-full">
                         <SearchBar handleChange={this.handleChange} state={this.state} handleSubmit={this.handleSubmit}/>
+                        {
+                        
+                            this.state.notify ? 
+                            <Notification content={this.state.notificationContent} style={this.state.notifyStyle}/>
+                            : null
+                        }
                         <div className="flex flex-wrap mt-3">
                             {
+                                this.state.movies.length > 0 ?
                                 this.state.movies.map(movie => {
                                     if (movie && movie.poster_path) {
                                         return <MovieCard key={movie.id} movie={movie}/>
                                     }
-                                })
+                                }) : null
                             }
                         </div>
                     </div>
