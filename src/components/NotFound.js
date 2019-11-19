@@ -7,7 +7,7 @@ const Notfound = () => {
         <main className="bg-gray-500 h-screen">
             <div className="flex flex-wrap pt-64 px-5">
             <div className="sm:w-2/3 w-full">
-                <img src={notFound} />
+                <img alt="404" src={notFound} />
 
             </div>
             <div className="sm:w-1/3 sm:p-0 w-full text-center">
