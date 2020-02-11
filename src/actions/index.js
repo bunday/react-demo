@@ -101,7 +101,7 @@ export const fetchTweets = data => async dispatch => {
     },
     err => {
         notifyDispatch(
-            err.message + ". Please enter a key word to search",
+            err.message ,
             "bg-red-500",
             dispatch
           );
@@ -164,6 +164,36 @@ export const fetchTweets = data => async dispatch => {
 //     payload: data
 //   });
 };
+
+export const fetchTrends = () => async dispatch => {
+    // dispatch notification to fetch trends
+    notifyDispatch("Loading, Please Wait ...", "bg-teal-500", dispatch);
+  
+    // fetch trends
+    const proxyurl = "https://cors-anywhere.herokuapp.com/";
+    const url = "https://api.twitter.com/1.1/trends/place.json?id=23424908";
+    await axios.get(proxyurl + url, { headers }).then(
+      res => {
+        console.log(res);
+        dispatch({
+          type: "FETCH_TRENDS",
+          payload: res.data
+        });
+        notifyDispatch(
+          "Tweet Fetched.",
+          "bg-green-500",
+          dispatch
+        );
+      },
+      err => {
+          notifyDispatch(
+              err.message,
+              "bg-red-500",
+              dispatch
+            );
+      }
+    );
+  };
 
 export const notifyPortals = (message, style) => async dispatch => {
   notifyDispatch(message, style, dispatch);

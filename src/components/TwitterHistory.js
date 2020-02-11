@@ -5,7 +5,7 @@ import Trend from "./Trend";
 import Header from "./Header";
 import Notification from "./Notification";
 import { connect } from "react-redux";
-import { fetchTweets, notifyPortals } from "../actions";
+import { fetchTweets, notifyPortals, fetchTrends } from "../actions";
 import moment from "moment";
 
 class TwitterHistory extends Component {
@@ -39,8 +39,11 @@ class TwitterHistory extends Component {
       this.props.notifyPortals("Enter a valid End Date", "bg-red-500");
       return;
     }
-    if(to.isBefore(from)){
-        this.props.notifyPortals("Start Date must be less than End Date", "bg-red-500");
+    if (to.isBefore(from)) {
+      this.props.notifyPortals(
+        "Start Date must be less than End Date",
+        "bg-red-500"
+      );
       return;
     }
     this.props.fetchTweets(this.state);
@@ -48,12 +51,20 @@ class TwitterHistory extends Component {
 
   renderListOfTweets() {
     const { tweets } = this.props;
-      if(!tweets.results) return;
-
-      const tweetCards = tweets.results.map(tweet => <TweetCard key={tweet.id} tweet={tweet}/>)
-      return tweetCards;
-    // if (tweets.length < 1) return;
-    // return tweets.map(tweet => <TweetCard key={tweet.id} tweet={tweet} />);
+    if (!tweets.results) return;
+    const tweetCards = tweets.results.map(tweet => (
+      <TweetCard key={tweet.id} tweet={tweet} />
+    ));
+    return tweetCards;
+  }
+  componentDidMount() {
+    this.props.fetchTrends();
+  }
+  renderListOfTrends(){
+    const { trends } = this.props;
+    console.log(trends);
+    if (trends.length < 1) return;
+    return trends[0].trends.map(trend => <Trend key={trend.name} trend={trend} />)
   }
 
   render() {
@@ -91,7 +102,7 @@ class TwitterHistory extends Component {
                 </p>
 
                 <div className="flex flex-wrap pt-4">
-                  <Trend />
+                  { this.renderListOfTrends() }
                 </div>
               </div>
             </div>
@@ -102,8 +113,10 @@ class TwitterHistory extends Component {
   }
 }
 const mapStateToProps = state => {
-  return { tweets: state.tweets, notify: state.notify };
+  return { tweets: state.tweets, notify: state.notify, trends: state.trends };
 };
-export default connect(mapStateToProps, { fetchTweets, notifyPortals })(
-  TwitterHistory
-);
+export default connect(mapStateToProps, {
+  fetchTweets,
+  notifyPortals,
+  fetchTrends
+})(TwitterHistory);
