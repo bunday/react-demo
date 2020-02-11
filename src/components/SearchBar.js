@@ -8,8 +8,12 @@ const SearchBar = (props) => {
         const { value } = event.target;
         setSearch(value);
     };
+    const handleSubmit = event => {
+        event.preventDefault();
+        props.handleSubmit(search);
+    }
     return (
-        <form onSubmit={props.handleSubmit} className="flex flex-wrap">
+        <form onSubmit={handleSubmit} className="flex flex-wrap">
         <div className="w-3/4">
             <input name="search" value={search} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700" placeholder="search..." />
         </div>
