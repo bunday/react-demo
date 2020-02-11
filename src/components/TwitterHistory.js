@@ -1,101 +1,109 @@
-import React, { Component } from 'react'
-import Form from './Form';
-import TweetCard from './TweetCard';
-import Trend from './Trend';
-import Header from './Header';
+import React, { Component } from "react";
+import Form from "./Form";
+import TweetCard from "./TweetCard";
+import Trend from "./Trend";
+import Header from "./Header";
+import Notification from "./Notification";
+import { connect } from "react-redux";
+import { fetchTweets, notifyPortals } from "../actions";
+import moment from "moment";
 
 class TwitterHistory extends Component {
+  state = {
+    username: "",
+    startDate: "",
+    endDate: ""
+  };
 
-    state = {
-        username: '',
-        startDate: '',
-        endDate: ''
+  handleChange = event => {
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
+  };
+
+  handleSubmission = event => {
+    event.preventDefault();
+    if (this.state.username.length < 3) {
+      this.props.notifyPortals(
+        "Enter a Username with 3 or more characters",
+        "bg-red-500"
+      );
+      return;
     }
-    header = {
-        method: 'post',
-        headers: new Headers({
-            'Authorization':'Bearer AAAAAAAAAAAAAAAAAAAAABWwAwEAAAAAwpR5bj91XGI6HnNczREqg4isd5M%3DEZON7bu5E3dsGhDowTuta7itBPCwS2gpe0r5hHpZyiLJTluu6t',
-            'Content-Type':'application/json;charset=utf-8'
-        }),
-        body: this.data
+    let from = moment(this.state.startDate);
+    let to = moment(this.state.endDate);
+    if (!from.isValid()) {
+      this.props.notifyPortals("Enter a valid Start Date", "bg-red-500");
+      return;
     }
-    data = {
-        "query":"from:bundayyo lang:en",
-        "maxResults": "100",
-        "fromDate":"201909010000", 
-        "toDate":"201911152359"
+    if (!to.isValid()) {
+      this.props.notifyPortals("Enter a valid End Date", "bg-red-500");
+      return;
     }
-
-    handleChange = (event) => {
-        const { name, value } = event.target;
-        this.setState({ [name]: value })
+    if(to.isBefore(from)){
+        this.props.notifyPortals("Start Date must be less than End Date", "bg-red-500");
+      return;
     }
+    this.props.fetchTweets(this.state);
+  };
 
-    handleSubmission = (event) => {
-        event.preventDefault();
-        console.log(this.state)
-    }
-    componentDidMount() {
-        // let grant = new FormData()
-        // grant.append('grant_type', 'client_credentials');
-        // const oAuthHeader = {
-        //     method: 'post',
-        //     headers: new Headers({
-        //         'Authorization':'Basic WEpzbTRWM3Z1WVE1OWlZczBVUWlEMExKODpUbkpoSzZsbXRlaVB6YUl5d3F0N3dXcXBSUTZZaE84cExyVGdSaFZVYlRYZ2hxM1ZkRw==',
-        //         'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'
-        //     }),
-        //     body: grant
-        // }
-        // const proxyurl = "https://cors-anywhere.herokuapp.com/";
-        // const url = 'https://api.twitter.com/oauth2/token'
-        // fetch(
-        //     proxyurl + url, 
-        //     oAuthHeader)
-        //     .then(jsonResponse => jsonResponse.json())
-        //     .then(response=> console.log(response));
-        const proxyurl = "https://cors-anywhere.herokuapp.com/";
-        const url = 'https://api.twitter.com/1.1/tweets/search/fullarchive/Dev.json'
-        fetch(
-            proxyurl + url, 
-            this.header)
-            .then(jsonResponse => jsonResponse.json())
-            .then(response=> console.log(response));
-    }
+  renderListOfTweets() {
+    const { tweets } = this.props;
+      if(!tweets.results) return;
 
+      const tweetCards = tweets.results.map(tweet => <TweetCard key={tweet.id} tweet={tweet}/>)
+      return tweetCards;
+    // if (tweets.length < 1) return;
+    // return tweets.map(tweet => <TweetCard key={tweet.id} tweet={tweet} />);
+  }
 
-
-    render() {
-        return (
-            <div>
-                <Header title='Twitter Today in History'/>
-            <main className="px-12 py-5 ">
-                <div className="py-4">
-                    <h2 className="text-blue-500 text-2xl">Fetch Twitter History on Specific Dates</h2>
-                </div>
-                <div className="flex flex-wrap">
-                    <div className="w-full lg:w-3/4">
-                        <Form data={this.state} handleChange={this.handleChange} handleSubmission={this.handleSubmission} />
-                        <div className="flex flex-wrap w-full mt-4">
-                            <TweetCard />
-                        </div>
-                    </div>
-                    <div className="w-full lg:w-1/4">
-                        <div className="shadow-lg md:mt-4 sm:mt-4 lg:ml-4 py-4 px-2">
-                            <p className="text-blue-500 text-lg">Latest Trends</p>
-                            <p className="text-gray-400 text-sm">Checkout What is Trending</p>
-
-                            <div className="flex flex-wrap pt-4">
-                                <Trend />
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-            </main>
+  render() {
+    return (
+      <div>
+        <Header title="Twitter Today in History" />
+        <main className="px-12 py-5 ">
+          <div className="py-4">
+            <h2 className="text-blue-500 text-2xl">
+              Fetch Twitter History on Specific Dates
+            </h2>
+          </div>
+          <div className="flex flex-wrap">
+            <div className="w-full lg:w-3/4">
+              <Form
+                data={this.state}
+                handleChange={this.handleChange}
+                handleSubmission={this.handleSubmission}
+              />
+              {this.props.notify ? (
+                <Notification
+                  content={this.props.notify.message}
+                  style={this.props.notify.style}
+                />
+              ) : null}
+              <div className="flex flex-wrap w-full mt-4">
+                {this.renderListOfTweets()}
+              </div>
             </div>
-        )
-    }
-}
+            <div className="w-full lg:w-1/4">
+              <div className="shadow-lg md:mt-4 sm:mt-4 lg:ml-4 py-4 px-2">
+                <p className="text-blue-500 text-lg">Latest Trends</p>
+                <p className="text-gray-400 text-sm">
+                  Checkout What is Trending
+                </p>
 
-export default TwitterHistory;
+                <div className="flex flex-wrap pt-4">
+                  <Trend />
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    );
+  }
+}
+const mapStateToProps = state => {
+  return { tweets: state.tweets, notify: state.notify };
+};
+export default connect(mapStateToProps, { fetchTweets, notifyPortals })(
+  TwitterHistory
+);
