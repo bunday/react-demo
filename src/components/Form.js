@@ -8,7 +8,7 @@ const Form = (props) => {
                     <label className="block text-gray-800 font-bold text-sm mb-2">
                         Username
                         </label>
-                    <input placeholder="@bundayyo" type="text" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700" value={props.data.username} name="username" onChange={props.handleChange} />
+                    <input placeholder="bundayyo" type="text" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700" value={props.data.username} name="username" onChange={props.handleChange} />
                 </div>
                 <div className="w-full md:w-1/2 lg:w-1/4 p-2">
                     <label className="block text-gray-800 font-bold text-sm mb-2">
