@@ -93,9 +93,18 @@ export const fetchTweets = data => async dispatch => {
         type: "FETCH_TWEETS",
         payload: res.data
       });
+      notifyDispatch(
+        "Tweet Fetched.",
+        "bg-green-500",
+        dispatch
+      );
     },
     err => {
-      console.log(err);
+        notifyDispatch(
+            err.message + ". Please enter a key word to search",
+            "bg-red-500",
+            dispatch
+          );
     }
   );
 //   const data = {

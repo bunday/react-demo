@@ -1,5 +1,4 @@
 import React from "react";
-import passport from "../img/passport.jpg";
 import { FaRetweet, FaReply, FaHeart, FaExternalLinkAlt } from "react-icons/fa";
 import moment from 'moment';
 
