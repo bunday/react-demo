@@ -14,13 +14,13 @@ const Form = (props) => {
                     <label className="block text-gray-800 font-bold text-sm mb-2">
                         From
                         </label>
-                    <input placeholder="01-01-2018" type="date" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700" value={props.data.startDate} name="startDate" onChange={props.handleChange} />
+                    <input placeholder="01-01-2018" type="datetime-local" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700" value={props.data.startDate} name="startDate" onChange={props.handleChange} />
                 </div>
                 <div className="w-full md:w-1/2 lg:w-1/4 p-2">
                     <label className="block text-gray-800 font-bold text-sm mb-2">
                         To
                         </label>
-                    <input placeholder="01-01-2019" type="date" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700" value={props.data.endDate} name="endDate" onChange={props.handleChange} />
+                    <input placeholder="01-01-2019" type="datetime-local" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700" value={props.data.endDate} name="endDate" onChange={props.handleChange} />
                 </div>
                 <div className="w-full md:w-1/2 lg:w-1/4 p-2 flex justify-center">
                     <button className="bg-blue-500 px-4 py-2 rounded text-white mt-8">
