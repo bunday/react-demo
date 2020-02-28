@@ -77,18 +77,22 @@ export const fetchTweets = data => async dispatch => {
   // dispatch notification to search
   notifyDispatch("Loading, Please Wait ...", "bg-teal-500", dispatch);
 
+  data.startDate.replace(/-/g, "")
+  data.startDate = data.startDate.replace('T','');
+  data.startDate = data.startDate.replace(':','');
+  data.endDate = data.endDate.replace('T','');
+  data.endDate = data.endDate.replace(':','');
   const dto = {
-    fromDate: `${data.startDate.replace(/-/g, "")}0000`,
-    toDate: `${data.endDate.replace(/-/g, "")}0000`,
+    fromDate: `${data.startDate.replace(/-/g, "")}`,
+    toDate: `${data.endDate.replace(/-/g, "")}`,
     query: `from:${data.username} lang:en`,
-    maxResults: "12"
+    maxResults: "100"
   };
   // fetch tweets
   const proxyurl = "https://cors-anywhere.herokuapp.com/";
   const url = "https://api.twitter.com/1.1/tweets/search/fullarchive/Dev.json";
   await axios.post(proxyurl + url, dto, { headers }).then(
     res => {
-      console.log(res);
       dispatch({
         type: "FETCH_TWEETS",
         payload: res.data
