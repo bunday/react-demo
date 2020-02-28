@@ -62,7 +62,6 @@ class TwitterHistory extends Component {
   }
   renderListOfTrends(){
     const { trends } = this.props;
-    console.log(trends);
     if (trends.length < 1) return;
     return trends[0].trends.map(trend => <Trend key={trend.name} trend={trend} />)
   }
