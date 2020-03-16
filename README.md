@@ -11,9 +11,13 @@
  - Select an end date and time
  - Fire your request 🔥
  
+ [View Twitter Demo](https://ibb.co/2Yg4PY1)
+ 
  please dont send too many request, I'm currently using the free tier so there is a monthly cap on my requests
  
  [Try the Twitter Feed Out](https://simple-react-demo.herokuapp.com/twitter)
+ 
+ List of Trends are also by the side.
  
  The movie feed fetches data from MovieDB API
  
